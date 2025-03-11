@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Timer - How Long Have You Been Alive?</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .start-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 10px;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .start-button:hover {
+            background: #218838;
+            transform: scale(1.1);
+        }
+
+        input, button {
+            padding: 12px;
+            margin: 15px 0;
+            width: 80%;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 1.5rem;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .result p {
+            margin: 10px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="start-screen">
+        <h1>Welcome to Life Timer</h1>
+        <button class="start-button" onclick="startApp()">Start</button>
+    </div>
+    
+    <div class="container" id="calculator">
+        <h1>How Long Have You Been Alive?</h1>
+        <input type="date" id="birthdate">
+        <button onclick="calculateAge()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function startApp() {
+            document.querySelector('.start-screen').style.display = 'none';
+            document.getElementById('calculator').style.display = 'block';
+        }
+
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById("birthdate").value);
+            const now = new Date();
+
+            if (!birthDate.getTime()) {
+                document.getElementById("result").innerHTML = "<p style='color: #ff4444;'>Please enter a valid date!</p>";
+                return;
+            }
+
+            const ageMilliseconds = now - birthDate;
+            const ageSeconds = Math.floor(ageMilliseconds / 1000);
+            const ageMinutes = Math.floor(ageSeconds / 60);
+            const ageHours = Math.floor(ageMinutes / 60);
+            const ageDays = Math.floor(ageHours / 24);
+            const ageWeeks = Math.floor(ageDays / 7);
+            const ageMonths = Math.floor(ageDays / 30.44);
+            const ageYears = Math.floor(ageMonths / 12);
+
+            document.getElementById("result").innerHTML = `
+                <p>You are approximately:</p>
+                <p><strong>${ageYears}</strong> years old</p>
+                <p><strong>${ageMonths}</strong> months old</p>
+                <p><strong>${ageWeeks}</strong> weeks old</p>
+                <p><strong>${ageDays}</strong> days old</p>
+                <p><strong>${ageHours}</strong> hours old</p>
+                <p><strong>${ageMinutes}</strong> minutes old</p>
+                <p><strong>${ageSeconds}</strong> seconds old</p>
+            `;
+        }
+    </script>
+</body>
+</html>
