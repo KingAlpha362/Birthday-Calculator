@@ -1,0 +1,18 @@
+from datetime import datetime # import the datetime module
+
+now = datetime.now() # get the current date and time
+current_year, current_month = now.year, now.month # get the current month and year
+
+name = input("What is your name? ") # ask the user for their name
+age = int(input(f"How old are you {name}? ")) # ask the user for their age
+birth_month = int(input(f"Which month were you born in {name} (1-12)? ")) #
+birth_year = int(input(f"Which year were you were born in {name} ? ")) # ask the user for their birth year
+
+calculated_age = current_year - birth_year - (birth_month > current_month) # calculate the user's age
+
+# check if the calculated age is the same as the age the user provided
+if calculated_age == age:
+    print(f"Hello {name}! You are {age} years old and your birth year is {birth_year}.")
+else: 
+    print(f"Based on your birth month you are actually {calculated_age} years old.")
+exit()
