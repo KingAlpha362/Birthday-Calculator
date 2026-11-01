@@ -1,0 +1,17 @@
+# Local operating-system files
+.DS_Store
+Thumbs.db
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+!.env.sample
